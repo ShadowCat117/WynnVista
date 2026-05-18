@@ -1,6 +1,6 @@
 package me.jamino.wynndhrangelimiter.controller;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 public interface IRenderDistanceController {
 

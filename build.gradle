@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.16-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -21,29 +21,28 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation 'com.google.code.gson:gson:2.8.9'
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // Distant Horizons API (optional - compile only)
     compileOnly "maven.modrinth:DistantHorizonsApi:${project.dh_api_version}"
 
     // Distant Horizons mod (runtime only for testing)
-    // modRuntimeOnly "maven.modrinth:DistantHorizons:${project.dh_mod_version}"
+    // runtimeOnly "maven.modrinth:DistantHorizons:${project.dh_mod_version}"
 
     // Voxy (optional - compile only)
     compileOnly "maven.modrinth:voxy:${project.voxy_version}"
 
     // Voxy mod (runtime only for testing) - uncomment to test with Voxy instead of DH
-    modRuntimeOnly "maven.modrinth:voxy:${project.voxy_version}"
+    runtimeOnly "maven.modrinth:voxy:${project.voxy_version}"
 
     // ModMenu
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+    api("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
@@ -62,7 +61,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 17
+    it.options.release = 25
 }
 
 java {
