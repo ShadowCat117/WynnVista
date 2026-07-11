@@ -8,7 +8,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 import java.io.File;
 import java.io.FileReader;
@@ -122,34 +122,34 @@ public class ModConfig implements ModMenuApi {
         return parent -> {
             ConfigBuilder builder = ConfigBuilder.create()
                     .setParentScreen(parent)
-                    .setTitle(Text.literal("WynnVista Config"));
+                    .setTitle(Component.literal("WynnVista Config"));
 
-            ConfigCategory general = builder.getOrCreateCategory(Text.literal("General"));
+            ConfigCategory general = builder.getOrCreateCategory(Component.literal("General"));
 
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-            general.addEntry(entryBuilder.startBooleanToggle(Text.literal("Show In-Game Messages"), config.showMessage)
+            general.addEntry(entryBuilder.startBooleanToggle(Component.literal("Show In-Game Messages"), config.showMessage)
                     .setDefaultValue(true)
-                    .setTooltip(Text.literal("Toggle whether to show messages when entering/leaving the Wynncraft area"))
+                    .setTooltip(Component.literal("Toggle whether to show messages when entering/leaving the Wynncraft area"))
                     .setSaveConsumer(newValue -> {
                         config.showMessage = newValue;
                         saveConfig();
                     })
                     .build());
 
-            general.addEntry(entryBuilder.startIntSlider(Text.literal("Max Render Distance"),
+            general.addEntry(entryBuilder.startIntSlider(Component.literal("Max Render Distance"),
                             config.maxRenderDistance > 0 ? config.maxRenderDistance : 80, 16, 256)
                     .setDefaultValue(80)
-                    .setTooltip(Text.literal("Your preferred LOD render distance inside the Wynncraft area (in chunks).\nNote: Voxy users may see rounded values due to 32-chunk increments (e.g., 80 → 96)."))
+                    .setTooltip(Component.literal("Your preferred LOD render distance inside the Wynncraft area (in chunks).\nNote: Voxy users may see rounded values due to 32-chunk increments (e.g., 80 → 96)."))
                     .setSaveConsumer(newValue -> {
                         config.maxRenderDistance = newValue;
                         saveConfig();
                     })
                     .build());
 
-            general.addEntry(entryBuilder.startIntSlider(Text.literal("Reduced Render Distance"), config.reducedRenderDistance, 12, 128)
+            general.addEntry(entryBuilder.startIntSlider(Component.literal("Reduced Render Distance"), config.reducedRenderDistance, 12, 128)
                     .setDefaultValue(16)
-                    .setTooltip(Text.literal("Reduced render distance for LODs outside Wynncraft area.\nNote: This only applies to Distant Horizons. Voxy users will have rendering disabled outside Wynn (no lag)."))
+                    .setTooltip(Component.literal("Reduced render distance for LODs outside Wynncraft area.\nNote: This only applies to Distant Horizons. Voxy users will have rendering disabled outside Wynn (no lag)."))
                     .setSaveConsumer(newValue -> {
                         config.reducedRenderDistance = newValue;
                         saveConfig();

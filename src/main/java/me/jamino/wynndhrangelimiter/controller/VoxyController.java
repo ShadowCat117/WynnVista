@@ -1,7 +1,7 @@
 package me.jamino.wynndhrangelimiter.controller;
 
 import me.jamino.wynndhrangelimiter.util.VoxyVisibilityHandler;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -224,12 +224,12 @@ public class VoxyController implements IRenderDistanceController {
 
         static boolean isSystemAvailable() {
             try {
-                MinecraftClient client = MinecraftClient.getInstance();
-                if (client == null || client.worldRenderer == null) {
+                Minecraft client = Minecraft.getInstance();
+                if (client == null || client.levelRenderer == null) {
                     return false;
                 }
 
-                if (client.worldRenderer instanceof me.cortex.voxy.client.core.IGetVoxyRenderSystem voxyAccessor) {
+                if (client.levelRenderer instanceof me.cortex.voxy.client.core.IVoxyRenderSystemHolder voxyAccessor) {
                     me.cortex.voxy.client.core.VoxyRenderSystem system = voxyAccessor.voxy$getRenderSystem();
                     return system != null;
                 }
@@ -241,12 +241,12 @@ public class VoxyController implements IRenderDistanceController {
 
         static boolean setRenderDistance(int distance) {
             try {
-                MinecraftClient client = MinecraftClient.getInstance();
-                if (client == null || client.worldRenderer == null) {
+                Minecraft client = Minecraft.getInstance();
+                if (client == null || client.levelRenderer == null) {
                     return false;
                 }
 
-                if (client.worldRenderer instanceof me.cortex.voxy.client.core.IGetVoxyRenderSystem voxyAccessor) {
+                if (client.levelRenderer instanceof me.cortex.voxy.client.core.IVoxyRenderSystemHolder voxyAccessor) {
                     me.cortex.voxy.client.core.VoxyRenderSystem system = voxyAccessor.voxy$getRenderSystem();
                     if (system != null) {
                         // Update config first

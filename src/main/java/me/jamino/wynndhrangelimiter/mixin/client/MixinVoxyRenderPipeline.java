@@ -22,7 +22,7 @@ public class MixinVoxyRenderPipeline {
      * any compute shaders or draw calls from even being considered.
      */
     @Inject(method = "runPipeline", at = @At("HEAD"), cancellable = true)
-    private void wynnvista$onRunPipeline(Viewport<?> viewport, int sourceFrameBuffer, int srcWidth, int srcHeight, CallbackInfo ci) {
+    private void wynnvista$onRunPipeline(Viewport<?> viewport, int sourceDepthTexture, int sourceColourTexture, int srcWidth, int srcHeight, CallbackInfo ci) {
         if (!VoxyVisibilityHandler.voxyVisible) {
             ci.cancel();
         }

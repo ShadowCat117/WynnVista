@@ -4,8 +4,8 @@ import me.jamino.wynndhrangelimiter.controller.DistantHorizonsController;
 import me.jamino.wynndhrangelimiter.controller.IRenderDistanceController;
 import me.jamino.wynndhrangelimiter.controller.VoxyController;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,16 +50,16 @@ public class WynnVistaMod {
         }
 
         // Check if we're already on a server (player joined before controller initialized)
-        MinecraftClient client = MinecraftClient.getInstance();
+        Minecraft client = Minecraft.getInstance();
         if (client != null && client.player != null && isOnServer) {
             LOGGER.info("Controller initialized while on server - applying initial render distance");
             checkAndUpdateRenderDistance(client, true);
         }
     }
 
-    void onPlayerJoin(MinecraftClient client) {
+    void onPlayerJoin(Minecraft client) {
         // Always track whether we're on a server, even if controller isn't ready
-        isOnServer = client.getCurrentServerEntry() != null && !client.isIntegratedServerRunning();
+        isOnServer = client.getCurrentServer() != null && !client.hasSingleplayerServer();
         LOGGER.info("Player joined " + (isOnServer ? "a server" : "singleplayer"));
 
         if (isOnServer) {
@@ -86,7 +86,7 @@ public class WynnVistaMod {
         resetState();
     }
 
-    void onClientTick(MinecraftClient client) {
+    void onClientTick(Minecraft client) {
         if (controller == null) return;
 
         // Always tick the controller (needed for Voxy's delayed initialization)
@@ -98,7 +98,7 @@ public class WynnVistaMod {
         }
     }
 
-    private void checkAndUpdateRenderDistance(MinecraftClient client, boolean initialCheck) {
+    private void checkAndUpdateRenderDistance(Minecraft client, boolean initialCheck) {
         if (client.player == null) {
             LOGGER.warn("Player is null, skipping render distance update");
             return;
@@ -153,7 +153,7 @@ public class WynnVistaMod {
 
             // Suppress messages for the first 1 second after joining
             if (!initialCheck && ModConfig.shouldShowMessage() && System.currentTimeMillis() - joinTimestamp > 1000) {
-                client.player.sendMessage(Text.literal(withinWynnRange ? "The Fog lifts." : "The Fog descends."), false);
+                client.player.sendSystemMessage(Component.literal(withinWynnRange ? "The Fog lifts." : "The Fog descends."));
             }
         }
     }
