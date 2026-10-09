@@ -4,7 +4,6 @@
   "package": "me.jamino.wynndhrangelimiter.mixin.client",
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "MixinVoxyRenderPipeline"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -33,10 +33,10 @@ dependencies {
     // runtimeOnly "maven.modrinth:DistantHorizons:${project.dh_mod_version}"
 
     // Voxy (optional - compile only)
-    compileOnly "maven.modrinth:voxy:${project.voxy_version}"
+//    compileOnly "maven.modrinth:voxy:${project.voxy_version}"
 
     // Voxy mod (runtime only for testing) - uncomment to test with Voxy instead of DH
-    runtimeOnly "maven.modrinth:voxy:${project.voxy_version}"
+//    runtimeOnly "maven.modrinth:voxy:${project.voxy_version}"
 
     // ModMenu
     implementation "com.terraformersmc:modmenu:${project.modmenu_version}"

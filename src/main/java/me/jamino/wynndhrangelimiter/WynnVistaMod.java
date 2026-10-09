@@ -2,7 +2,7 @@ package me.jamino.wynndhrangelimiter;
 
 import me.jamino.wynndhrangelimiter.controller.DistantHorizonsController;
 import me.jamino.wynndhrangelimiter.controller.IRenderDistanceController;
-import me.jamino.wynndhrangelimiter.controller.VoxyController;
+//import me.jamino.wynndhrangelimiter.controller.VoxyController;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -28,7 +28,7 @@ public class WynnVistaMod {
             controller = new DistantHorizonsController();
         } else if (hasVoxy) {
             LOGGER.info("Voxy detected, using Voxy controller");
-            controller = new VoxyController();
+//            controller = new VoxyController();
         } else {
             LOGGER.warn("No supported LOD mod detected (Distant Horizons or Voxy). WynnVista will be disabled.");
             return;
